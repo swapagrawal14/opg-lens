@@ -1,5 +1,5 @@
 // OPG Lens service worker: app shell + samples precached, models and CDN files cached on first use.
-const V = "opg-lens-v2.0.0";            // bump on every app file change
+const V = "opg-lens-v2.1.0";            // bump on every app file change
 const MODELS = "opg-lens-models-v0";    // bump only when models/*.onnx change
 const SHELL = ["./", "index.html", "style.css", "app.js", "content.js", "manifest.json", "icon.svg", "docs/icon-512.png", "samples/cases.json",
   ...[1, 2, 3, 4, 5, 6, 7, 8].map(i => `samples/case${i}.jpg`)];
