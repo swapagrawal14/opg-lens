@@ -1,0 +1,304 @@
+[
+ {
+  "id": "case1",
+  "img": "samples/case1.jpg",
+  "w": 1600,
+  "h": 722,
+  "source": "DENTEX train_635.png",
+  "findings": [
+   {
+    "fdi": "38",
+    "finding": "Impacted",
+    "box": [
+     1114,
+     387,
+     79,
+     143
+    ]
+   },
+   {
+    "fdi": "48",
+    "finding": "Impacted",
+    "box": [
+     360,
+     383,
+     139,
+     139
+    ]
+   },
+   {
+    "fdi": "18",
+    "finding": "Impacted",
+    "box": [
+     457,
+     214,
+     121,
+     91
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case2",
+  "img": "samples/case2.jpg",
+  "w": 1600,
+  "h": 732,
+  "source": "DENTEX train_252.png",
+  "findings": [
+   {
+    "fdi": "27",
+    "finding": "Caries",
+    "box": [
+     1030,
+     290,
+     99,
+     159
+    ]
+   },
+   {
+    "fdi": "37",
+    "finding": "Caries",
+    "box": [
+     1039,
+     449,
+     128,
+     162
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case3",
+  "img": "samples/case3.jpg",
+  "w": 1600,
+  "h": 748,
+  "source": "DENTEX train_325.png",
+  "findings": [
+   {
+    "fdi": "34",
+    "finding": "Caries",
+    "box": [
+     912,
+     397,
+     61,
+     189
+    ]
+   },
+   {
+    "fdi": "36",
+    "finding": "Caries",
+    "box": [
+     1000,
+     393,
+     119,
+     174
+    ]
+   },
+   {
+    "fdi": "35",
+    "finding": "Caries",
+    "box": [
+     954,
+     401,
+     73,
+     177
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case4",
+  "img": "samples/case4.jpg",
+  "w": 1600,
+  "h": 751,
+  "source": "DENTEX train_317.png",
+  "findings": [
+   {
+    "fdi": "26",
+    "finding": "Deep Caries",
+    "box": [
+     1048,
+     227,
+     84,
+     190
+    ]
+   },
+   {
+    "fdi": "27",
+    "finding": "Caries",
+    "box": [
+     1117,
+     210,
+     82,
+     191
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case5",
+  "img": "samples/case5.jpg",
+  "w": 1600,
+  "h": 708,
+  "source": "DENTEX train_211.png",
+  "findings": [
+   {
+    "fdi": "48",
+    "finding": "Impacted",
+    "box": [
+     403,
+     311,
+     120,
+     134
+    ]
+   },
+   {
+    "fdi": "37",
+    "finding": "Caries",
+    "box": [
+     1024,
+     364,
+     132,
+     172
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case6",
+  "img": "samples/case6.jpg",
+  "w": 1600,
+  "h": 730,
+  "source": "DENTEX train_687.png",
+  "findings": [
+   {
+    "fdi": "18",
+    "finding": "Deep Caries",
+    "box": [
+     434,
+     197,
+     109,
+     162
+    ]
+   },
+   {
+    "fdi": "48",
+    "finding": "Caries",
+    "box": [
+     386,
+     357,
+     174,
+     132
+    ]
+   },
+   {
+    "fdi": "17",
+    "finding": "Caries",
+    "box": [
+     499,
+     222,
+     77,
+     154
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case7",
+  "img": "samples/case7.jpg",
+  "w": 1600,
+  "h": 710,
+  "source": "DENTEX train_533.png",
+  "findings": [
+   {
+    "fdi": "45",
+    "finding": "Deep Caries",
+    "box": [
+     554,
+     381,
+     123,
+     134
+    ]
+   },
+   {
+    "fdi": "36",
+    "finding": "Caries",
+    "box": [
+     972,
+     336,
+     159,
+     155
+    ]
+   },
+   {
+    "fdi": "17",
+    "finding": "Caries",
+    "box": [
+     542,
+     186,
+     112,
+     184
+    ]
+   },
+   {
+    "fdi": "47",
+    "finding": "Caries",
+    "box": [
+     437,
+     286,
+     152,
+     121
+    ]
+   }
+  ]
+ },
+ {
+  "id": "case8",
+  "img": "samples/case8.jpg",
+  "w": 1600,
+  "h": 741,
+  "source": "DENTEX train_568.png",
+  "findings": [
+   {
+    "fdi": "24",
+    "finding": "Deep Caries",
+    "box": [
+     919,
+     180,
+     72,
+     194
+    ]
+   },
+   {
+    "fdi": "26",
+    "finding": "Caries",
+    "box": [
+     1011,
+     202,
+     84,
+     174
+    ]
+   },
+   {
+    "fdi": "27",
+    "finding": "Caries",
+    "box": [
+     1077,
+     205,
+     93,
+     167
+    ]
+   },
+   {
+    "fdi": "48",
+    "finding": "Deep Caries",
+    "box": [
+     362,
+     371,
+     142,
+     143
+    ]
+   }
+  ]
+ }
+]

@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>OPG Lens: learn and second-look for panoramic X-rays</title>
+<meta name="theme-color" content="#0f172a"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css">
+</head><body>
+<header><div class="brand">🦷 OPG Lens</div><button id="setBtn" class="ghost" aria-label="Settings">⚙️</button></header>
+<div class="disc">Learning and second-look aid only. Not a diagnosis. Always confirm clinically.</div>
+<nav class="tabs"><button data-t="look" class="on">Second look</button><button data-t="learn">Learn</button></nav>
+
+<main>
+<section id="look">
+  <div class="row"><label class="btn">Upload OPG<input id="file" type="file" accept="image/*" hidden></label>
+  <button id="sampleBtn" class="btn alt">Try a sample</button></div>
+  <div id="status" class="muted">Your X-ray stays on this phone. Nothing is uploaded.</div>
+  <div class="stage"><canvas id="cv"></canvas></div>
+  <div id="legend" class="legend"></div>
+  <div id="list"></div>
+  <div id="reportBox" hidden><h3>Report</h3><div class="seg"><button data-l="en" class="on">English</button><button data-l="hi">हिंदी</button></div>
+  <pre id="report"></pre><div class="row"><button id="shareBtn" class="btn">Share</button><button id="copyBtn" class="btn alt">Copy</button></div></div>
+</section>
+
+<section id="learn" hidden>
+  <div class="streak"><span id="dayLbl">OPG of the Day</span><span>🔥 <b id="streak">0</b> day streak · ⭐ <b id="best">0</b></span></div>
+  <p class="muted">Find every abnormal tooth. Tap the X-ray where you see it, then choose the finding and FDI number.</p>
+  <div class="stage"><canvas id="lcv"></canvas></div>
+  <div id="picks"></div>
+  <div class="row"><button id="revealBtn" class="btn">Check my answers</button><button id="nextBtn" class="btn alt">Another case</button></div>
+  <div id="lresult"></div>
+</section>
+</main>
+
+<dialog id="pickDlg"><form method="dialog"><h3>What did you spot?</h3>
+<div id="fOpts" class="chips"></div><label>FDI tooth number<input id="fdiIn" inputmode="numeric" maxlength="2" placeholder="e.g. 36"></label>
+<div class="row"><button value="cancel" class="btn alt">Cancel</button><button id="pickOk" value="ok" class="btn">Add</button></div></form></dialog>
+
+<dialog id="exDlg"><div id="exBody"></div><div id="tutor" hidden><textarea id="tq" rows="2" placeholder="Ask the tutor, e.g. why is this deep caries and not caries?"></textarea><button id="tAsk" class="btn">Ask</button><div id="tAns" class="muted"></div></div>
+<form method="dialog"><button class="btn alt">Close</button></form></dialog>
+
+<dialog id="setDlg"><form method="dialog"><h3>Your own AI (optional)</h3>
+<p class="muted">Bring your own key for a tutor chat and richer reports. Works with any OpenAI-compatible endpoint. The key is stored only in this browser.</p>
+<label>Base URL<input id="sUrl" placeholder="https://api.openai.com/v1"></label>
+<label>API key<input id="sKey" type="password" placeholder="sk-..."></label>
+<label>Model<input id="sModel" placeholder="gpt-4o-mini"></label>
+<label class="chk"><input id="sVision" type="checkbox"> Allow sending the X-ray image to this model (vision). Only do this with anonymised images.</label>
+<div class="row"><button value="cancel" class="btn alt">Close</button><button id="sSave" value="ok" class="btn">Save</button></div>
+<p class="tiny">Detection models trained on DENTEX (Hamamci et al., 2023, CC BY-NC-SA 4.0). Non-commercial use.</p></form></dialog>
+
+<script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
+<script src="content.js"></script><script src="app.js"></script>
+</body></html>
