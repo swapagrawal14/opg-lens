@@ -1,50 +1,152 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>OPG Lens: learn and second-look for panoramic X-rays</title>
-<meta name="theme-color" content="#0f172a"><link rel="manifest" href="manifest.json"><link rel="stylesheet" href="style.css">
+<title>OPG Lens · learn and second-look for panoramic X-rays</title>
+<meta name="description" content="A free, on-device learning and second-look aid for dental panoramic radiographs (OPGs). The X-ray never leaves your phone. Not a diagnosis.">
+<meta name="theme-color" content="#040a14">
+<meta property="og:title" content="OPG Lens: a second pair of eyes for every OPG">
+<meta property="og:description" content="On-device AI that flags caries, deep caries, periapical lesions and impacted teeth, plus a daily OPG learning game. Learning and second-look aid, not a diagnosis.">
+<meta property="og:image" content="https://swapagrawal14.github.io/opg-lens/docs/hero.png">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="manifest" href="manifest.json"><link rel="icon" href="icon.svg" type="image/svg+xml"><link rel="apple-touch-icon" href="docs/icon-512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700;800&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Noto+Sans+Devanagari:wght@400;600&display=swap">
+<link rel="stylesheet" href="style.css">
 </head><body>
-<header><div class="brand">🦷 OPG Lens</div><button id="setBtn" class="ghost" aria-label="Settings">⚙️</button></header>
-<div class="disc">Learning and second-look aid only. Not a diagnosis. Always confirm clinically.</div>
-<nav class="tabs"><button data-t="look" class="on">Second look</button><button data-t="learn">Learn</button></nav>
+<div class="sky" aria-hidden="true"><i class="g1"></i><i class="g2"></i><i class="grid"></i></div>
+
+<header class="top">
+  <a href="#home" class="brand" aria-label="OPG Lens home">
+    <svg class="logo" viewBox="0 0 40 40" aria-hidden="true"><defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#7ce7ff"/><stop offset="1" stop-color="#6d8bff"/></linearGradient></defs>
+      <circle cx="20" cy="20" r="17" fill="none" stroke="url(#lg)" stroke-width="3"/><path d="M13 16c0-3 2.5-4.5 4.5-4 1.2.3 1.8.8 2.5.8s1.3-.5 2.5-.8c2-.5 4.5 1 4.5 4 0 2.5-1 4-1.6 6.5-.6 2.6-.9 5.5-2.3 5.5-1.6 0-1.3-4.6-3.1-4.6s-1.5 4.6-3.1 4.6c-1.4 0-1.7-2.9-2.3-5.5C14 20 13 18.5 13 16z" fill="url(#lg)"/></svg>
+    <span>OPG <b>Lens</b></span><em class="ver">v0</em>
+  </a>
+  <button id="setBtn" class="icon-btn" aria-label="Your own AI settings"><svg viewBox="0 0 24 24"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7z"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg></button>
+</header>
+<div class="disc" role="note"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/></svg><span>Learning and second-look aid only. <b>Not a diagnosis.</b> Always confirm clinically.</span></div>
 
 <main>
-<section id="look">
-  <div class="row"><label class="btn">Upload OPG<input id="file" type="file" accept="image/*" hidden></label>
-  <button id="sampleBtn" class="btn alt">Try a sample</button></div>
-  <div id="status" class="muted">Your X-ray stays on this phone. Nothing is uploaded.</div>
-  <div class="stage"><canvas id="cv"></canvas></div>
-  <div id="legend" class="legend"></div>
-  <div id="list"></div>
-  <div id="reportBox" hidden><h3>Report</h3><div class="seg"><button data-l="en" class="on">English</button><button data-l="hi">हिंदी</button></div>
-  <pre id="report"></pre><div class="row"><button id="shareBtn" class="btn">Share</button><button id="copyBtn" class="btn alt">Copy</button></div></div>
+<!-- ================= HOME ================= -->
+<section id="home" class="view on">
+  <div class="hero">
+    <p class="eyebrow"><span class="dot"></span>On-device AI for panoramic X-rays</p>
+    <h1>A second pair<br>of eyes for<br>every <span class="hl">OPG</span>.</h1>
+    <p class="lede">Flags caries, deep caries, periapical lesions and impacted teeth with tooth numbers, then helps you learn to read them yourself. It runs on your phone, so the X-ray never leaves it.</p>
+  </div>
+  <figure class="scanner" aria-label="Sample OPG with the four finding types">
+    <div class="scan-img"><img id="heroImg" src="samples/case1.jpg" alt="Sample panoramic radiograph from the DENTEX dataset"><div id="heroBoxes"></div><i class="beam"></i></div>
+    <figcaption><span>Sample DENTEX case · expert labels</span><span class="live"><i></i>scanning</span></figcaption>
+  </figure>
+  <div class="modes">
+    <a href="#look" class="mode m-look">
+      <span class="m-ico"><svg viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M3 12h18"/></svg></span>
+      <span class="m-txt"><b>Second look</b><small>Upload an OPG. Get boxed findings with tooth numbers and a report in English and हिंदी.</small></span>
+      <span class="m-go">→</span>
+    </a>
+    <a href="#learn" class="mode m-learn">
+      <span class="m-ico"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4" fill="currentColor"/></svg></span>
+      <span class="m-txt"><b>Learn</b><small>OPG of the Day. Tap what you spot, score against expert labels, keep your streak.</small></span>
+      <span class="m-go"><span class="flame-mini">🔥</span><b id="homeStreak">0</b></span>
+    </a>
+  </div>
+  <ul class="trust">
+    <li><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18h2"/></svg>Runs on device</li>
+    <li><svg viewBox="0 0 24 24"><path d="M5 12.5a10 10 0 0 1 14 0M8.5 16a5 5 0 0 1 7 0M12 19.5h.01"/><path d="M3 3l18 18"/></svg>Works offline</li>
+    <li><svg viewBox="0 0 24 24"><path d="M12 2l8 3v6c0 5-3.4 9.4-8 11-4.6-1.6-8-6-8-11V5z"/></svg>No upload</li>
+    <li><span class="hi-ico">अ</span>EN · हिंदी</li>
+  </ul>
+  <p class="foot">Free and open source. Models trained on DENTEX (Hamamci et al., 2023, CC BY-NC-SA 4.0), non-commercial. Built by Dr. Swapnil Agrawal, BDS. <a href="https://github.com/swapagrawal14/opg-lens" target="_blank" rel="noopener">GitHub</a></p>
 </section>
 
-<section id="learn" hidden>
-  <div class="streak"><span id="dayLbl">OPG of the Day</span><span>🔥 <b id="streak">0</b> day streak · ⭐ <b id="best">0</b></span></div>
-  <p class="muted">Find every abnormal tooth. Tap the X-ray where you see it, then choose the finding and FDI number.</p>
-  <div class="stage"><canvas id="lcv"></canvas></div>
+<!-- ================= SECOND LOOK ================= -->
+<section id="look" class="view">
+  <div class="sec-head"><h2>Second look</h2><p>Your X-ray stays on this phone.</p></div>
+  <div class="actions">
+    <label class="btn primary"><svg viewBox="0 0 24 24"><path d="M12 16V4M7 9l5-5 5 5"/><path d="M4 16v3a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-3"/></svg>Upload OPG<input id="file" type="file" accept="image/*" hidden></label>
+    <button id="sampleBtn" class="btn"><svg viewBox="0 0 24 24"><rect x="3" y="6" width="18" height="12" rx="3"/><path d="M8 12h.01M12 12h.01M16 12h.01"/></svg>Try a sample</button>
+  </div>
+
+  <div id="progress" class="progress" hidden>
+    <div class="p-top"><span id="pLabel">Downloading AI models</span><b id="pPct">0%</b></div>
+    <div class="bar"><i id="pBar"></i></div>
+    <small id="pSub">One-time download, about 38 MB. Cached for offline use after this.</small>
+  </div>
+
+  <div id="empty" class="empty">
+    <div class="e-art" aria-hidden="true"><svg viewBox="0 0 120 60"><rect x="2" y="2" width="116" height="56" rx="10" fill="none" stroke="currentColor" stroke-width="2" stroke-dasharray="5 5"/><path d="M22 30c8-10 18-12 38-12s30 2 38 12c-8 10-18 12-38 12S30 40 22 30z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M38 26v8M46 24v12M54 23v14M62 23v14M70 23v14M78 24v12M86 26v8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+    <b>Drop in an OPG to begin</b>
+    <p>Upload a panoramic X-ray or try one of 8 DENTEX sample cases. Analysis takes a few seconds and happens entirely on this device.</p>
+  </div>
+  <div id="errBox" class="error" hidden><b>Something went wrong</b><p id="errMsg"></p><button id="retryBtn" class="btn">Try again</button></div>
+
+  <div id="stageWrap" class="stage" hidden>
+    <div class="zoom" id="lookZoom"><div class="zin"><canvas id="cv"></canvas></div><i class="beam" id="lookBeam" hidden></i></div>
+    <div class="zctl"><button data-z="in" aria-label="Zoom in">+</button><button data-z="out" aria-label="Zoom out">−</button><button data-z="reset" aria-label="Reset zoom">⤢</button></div>
+    <div class="hint">Tap a box to highlight · double-tap or pinch to zoom</div>
+  </div>
+  <div id="status" class="status" hidden></div>
+
+  <div id="findWrap" hidden>
+    <div class="list-head"><h3>Findings to double-check</h3><span id="fCount" class="count"></span></div>
+    <div id="list"></div>
+  </div>
+
+  <div id="reportBox" class="card report" hidden>
+    <div class="list-head"><h3>Patient report</h3>
+      <div class="seg" role="tablist"><i class="seg-glider"></i><button data-l="en" class="on" role="tab">English</button><button data-l="hi" role="tab" lang="hi">हिंदी</button></div></div>
+    <pre id="report"></pre>
+    <div class="actions"><button id="shareBtn" class="btn primary"><svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>Share</button><button id="copyBtn" class="btn"><svg viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span>Copy</span></button></div>
+  </div>
+</section>
+
+<!-- ================= LEARN ================= -->
+<section id="learn" class="view">
+  <div class="sec-head"><h2>Learn</h2><p>Find every abnormal tooth, like an examiner would.</p></div>
+  <div class="stats">
+    <div class="stat flame"><svg class="flame-svg" viewBox="0 0 32 40" aria-hidden="true"><defs><linearGradient id="fl" x1="0" y1="1" x2="0" y2="0"><stop offset="0" stop-color="#ff5a1f"/><stop offset=".6" stop-color="#ffb02e"/><stop offset="1" stop-color="#ffe27a"/></linearGradient></defs><path class="f-out" d="M16 2c2 7 10 11 10 22a10 10 0 0 1-20 0c0-5 2.5-8 4.5-10 .5 3 1.8 5 3.5 5-1-6 0-12 2-17z" fill="url(#fl)"/><path class="f-in" d="M16 20c1 3 5 5 5 10a5 5 0 0 1-10 0c0-3 2-4.5 3-6 .3 1.4 1 2.2 2 2.2-.4-2.5-.4-4.2 0-6.2z" fill="#fff4c2"/></svg>
+      <div><b id="streak">0</b><small>day streak</small></div></div>
+    <div class="stat"><span class="mini-ring"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" class="trk"/><circle cx="18" cy="18" r="15" class="val" id="bestRing"/></svg></span><div><b id="best">0</b><small>best score %</small></div></div>
+    <div class="stat"><span class="today-ico" id="todayIco">○</span><div><b id="todayLbl">To do</b><small>today's case</small></div></div>
+  </div>
+  <div class="case-head"><span id="dayLbl" class="tag">OPG of the Day</span><span class="muted" id="caseHint">Tap the X-ray where you see a finding, then name it.</span></div>
+  <div class="stage">
+    <div class="zoom" id="learnZoom"><div class="zin"><canvas id="lcv"></canvas></div></div>
+    <div class="zctl"><button data-z="in" aria-label="Zoom in">+</button><button data-z="out" aria-label="Zoom out">−</button><button data-z="reset" aria-label="Reset zoom">⤢</button></div>
+  </div>
   <div id="picks"></div>
-  <div class="row"><button id="revealBtn" class="btn">Check my answers</button><button id="nextBtn" class="btn alt">Another case</button></div>
+  <div class="actions"><button id="revealBtn" class="btn primary">Check my answers</button><button id="nextBtn" class="btn">Another case</button></div>
   <div id="lresult"></div>
 </section>
 </main>
 
+<nav class="dock" aria-label="Sections">
+  <a href="#home" data-v="home" class="on"><svg viewBox="0 0 24 24"><path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6h-6v6H4a1 1 0 0 1-1-1z"/></svg>Home</a>
+  <a href="#look" data-v="look"><svg viewBox="0 0 24 24"><path d="M3 8V5a2 2 0 0 1 2-2h3M16 3h3a2 2 0 0 1 2 2v3M21 16v3a2 2 0 0 1-2 2h-3M8 21H5a2 2 0 0 1-2-2v-3"/><path d="M3 12h18"/></svg>Second look</a>
+  <a href="#learn" data-v="learn"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.4"/></svg>Learn</a>
+</nav>
+
 <dialog id="pickDlg"><form method="dialog"><h3>What did you spot?</h3>
-<div id="fOpts" class="chips"></div><label>FDI tooth number<input id="fdiIn" inputmode="numeric" maxlength="2" placeholder="e.g. 36"></label>
-<div class="row"><button value="cancel" class="btn alt">Cancel</button><button id="pickOk" value="ok" class="btn">Add</button></div></form></dialog>
+<div id="fOpts" class="chips"></div>
+<div class="fdi-head"><span>FDI tooth number <small>(optional)</small></span><b id="fdiShow">–</b></div>
+<div id="fdiGrid" class="fdi-grid" aria-label="FDI tooth chart"></div>
+<input id="fdiIn" type="hidden">
+<div class="actions"><button value="cancel" class="btn">Cancel</button><button id="pickOk" value="ok" class="btn primary">Add mark</button></div></form></dialog>
 
-<dialog id="exDlg"><div id="exBody"></div><div id="tutor" hidden><textarea id="tq" rows="2" placeholder="Ask the tutor, e.g. why is this deep caries and not caries?"></textarea><button id="tAsk" class="btn">Ask</button><div id="tAns" class="muted"></div></div>
-<form method="dialog"><button class="btn alt">Close</button></form></dialog>
+<dialog id="exDlg"><div id="exBody"></div><div id="tutor" hidden><textarea id="tq" rows="2" placeholder="Ask the tutor, e.g. why is this deep caries and not caries?"></textarea><button id="tAsk" class="btn primary">Ask</button><div id="tAns" class="muted"></div></div>
+<p class="tiny">Draft teaching notes. A learning aid, not a diagnosis.</p>
+<form method="dialog"><button class="btn">Close</button></form></dialog>
 
-<dialog id="setDlg"><form method="dialog"><h3>Your own AI (optional)</h3>
-<p class="muted">Bring your own key for a tutor chat and richer reports. Works with any OpenAI-compatible endpoint. The key is stored only in this browser.</p>
+<dialog id="setDlg"><form method="dialog"><h3>Your own AI <small>(optional)</small></h3>
+<p class="muted">Bring your own key for a tutor chat. Works with any OpenAI-compatible endpoint. The key is stored only in this browser and calls go straight from your browser to that endpoint.</p>
 <label>Base URL<input id="sUrl" placeholder="https://api.openai.com/v1"></label>
 <label>API key<input id="sKey" type="password" placeholder="sk-..."></label>
 <label>Model<input id="sModel" placeholder="gpt-4o-mini"></label>
 <label class="chk"><input id="sVision" type="checkbox"> Allow sending the X-ray image to this model (vision). Only do this with anonymised images.</label>
-<div class="row"><button value="cancel" class="btn alt">Close</button><button id="sSave" value="ok" class="btn">Save</button></div>
+<div class="actions"><button value="cancel" class="btn">Close</button><button id="sSave" value="ok" class="btn primary">Save</button></div>
 <p class="tiny">Detection models trained on DENTEX (Hamamci et al., 2023, CC BY-NC-SA 4.0). Non-commercial use.</p></form></dialog>
+
+<div id="toast" class="toast" role="status"></div>
+<canvas id="confetti" aria-hidden="true"></canvas>
 
 <script src="https://cdn.jsdelivr.net/npm/onnxruntime-web@1.20.1/dist/ort.min.js"></script>
 <script src="content.js"></script><script src="app.js"></script>
